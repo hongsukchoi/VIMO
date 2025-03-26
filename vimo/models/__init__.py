@@ -7,7 +7,7 @@ from .hmr_vimo import HMR_VIMO
 def get_default_config():
     cfg_file = os.path.join(
         os.path.dirname(__file__),
-        'configs/config_vimo.yaml'
+        '../config_vimo.yaml'
         )
 
     cfg = CN()

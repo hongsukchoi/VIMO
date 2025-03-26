@@ -9,24 +9,25 @@ from smplx import SMPLLayer as _SMPLLayer
 from smplx.body_models import SMPLOutput
 from smplx.lbs import vertices2joints
 
-from lib.core.constants import JOINT_MAP, JOINT_NAMES
+from vimo.core.constants import JOINT_MAP, JOINT_NAMES
 
 
-# SMPL data path
-SMPL_DATA_PATH = "data/smpl/"
+# # SMPL data path
+# SMPL_DATA_PATH ="./data/smpl/"
 
-SMPL_MODEL_PATH = os.path.join(SMPL_DATA_PATH, "SMPL_NEUTRAL.pkl")
-SMPL_MEAN_PARAMS = os.path.join(SMPL_DATA_PATH, "smpl_mean_params.npz")
-SMPL_KINTREE_PATH = os.path.join(SMPL_DATA_PATH, "kintree_table.pkl")
-JOINT_REGRESSOR_TRAIN_EXTRA = os.path.join(SMPL_DATA_PATH, 'J_regressor_extra.npy')
-JOINT_REGRESSOR_H36M = os.path.join(SMPL_DATA_PATH, 'J_regressor_h36m.npy')
+# SMPL_MODEL_PATH = os.path.join(SMPL_DATA_PATH, "SMPL_NEUTRAL.pkl")
+# SMPL_MEAN_PARAMS = os.path.join(SMPL_DATA_PATH, "smpl_mean_params.npz")
+# SMPL_KINTREE_PATH = os.path.join(SMPL_DATA_PATH, "kintree_table.pkl")
+# JOINT_REGRESSOR_TRAIN_EXTRA = os.path.join(SMPL_DATA_PATH, 'J_regressor_extra.npy')
+# JOINT_REGRESSOR_H36M = os.path.join(SMPL_DATA_PATH, 'J_regressor_h36m.npy')
 
 
 class SMPL(_SMPL):
 
-    def __init__(self, create_default=False, *args, **kwargs):
-        kwargs["model_path"] = "data/smpl"
+    def __init__(self, smpl_data_path, create_default=False, *args, **kwargs):
+        kwargs["model_path"] = smpl_data_path
 
+        smpl_joint_regressor_extra = os.path.join(smpl_data_path, 'J_regressor_extra.npy')
         # remove the verbosity for the 10-shapes beta parameters
         with contextlib.redirect_stdout(None):
             super(SMPL, self).__init__(
@@ -40,7 +41,7 @@ class SMPL(_SMPL):
 
         # SPIN 49(25 OP + 24) joints
         joints = [JOINT_MAP[i] for i in JOINT_NAMES]
-        J_regressor_extra = np.load(JOINT_REGRESSOR_TRAIN_EXTRA)
+        J_regressor_extra = np.load(smpl_joint_regressor_extra)
         self.register_buffer('J_regressor_extra', torch.tensor(J_regressor_extra, dtype=torch.float32))
         self.joint_map = torch.tensor(joints, dtype=torch.long)
         

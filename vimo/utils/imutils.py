@@ -7,7 +7,7 @@ from skimage.transform import rotate, resize
 import cv2
 from torchvision.transforms import Normalize, ToTensor, Compose
 
-from lib.core import constants
+from vimo.core import constants
 
 def get_normalization():
     normalize_img = Compose([ToTensor(),

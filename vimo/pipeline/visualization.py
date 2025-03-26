@@ -6,9 +6,9 @@ from tqdm import tqdm
 from glob import glob
 import imageio
 
-from lib.vis.traj import *
-from lib.models.smpl import SMPL
-from lib.vis.renderer import Renderer
+from vimo.vis.traj import *
+from vimo.models.smpl import SMPL
+from vimo.vis.renderer import Renderer
 
 
 def visualize_tram(seq_folder, floor_scale=2, bin_size=-1, max_faces_per_bin=30000):

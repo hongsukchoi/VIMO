@@ -6,8 +6,8 @@ import matplotlib.ticker as ticker
 from scipy.ndimage import gaussian_filter
 
 from .tools import checkerboard_geometry
-from lib.models.smpl import SMPL
-from lib.utils.rotation_conversions import quaternion_to_matrix, matrix_to_quaternion
+from vimo.models.smpl import SMPL
+from vimo.utils.rotation_conversions import quaternion_to_matrix, matrix_to_quaternion
 
 
 def traj_filter(pred_vert_w, pred_j3d_w, sigma=3):

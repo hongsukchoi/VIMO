@@ -3,18 +3,20 @@ from torch.utils.data import Dataset
 from torchvision.transforms import Normalize, ToTensor, Compose
 import numpy as np
 import cv2
+from os.path import join
+from skimage.util.shape import view_as_windows
 
-from lib.core import constants
-from lib.utils.imutils import crop, boxes_2_cs
+from vimo.core import constants, config
+from vimo.utils.imutils import crop, boxes_2_cs
 
 
-class TrackDataset(Dataset):
+class ImageDataset(Dataset):
     """
-    Track Dataset Class - Load images/crops of the tracked boxes.
+    Image Dataset Class - Handles data loading from image files.
     """
     def __init__(self, imgfiles, boxes, crop_size=256, dilate=1.0,
-                img_focal=None, img_center=None, normalization=True):
-        super(TrackDataset, self).__init__()
+                img_focal=None, img_center=None, normalization=False, step=8):
+        super(ImageDataset, self).__init__()
 
         self.imgfiles = imgfiles
         self.crop_size = crop_size
@@ -31,19 +33,31 @@ class TrackDataset(Dataset):
         self.img_focal = img_focal
         self.img_center = img_center
 
+        idx = np.arange(0, len(imgfiles))
+        self.seq_idx = view_as_windows(idx, (16,), step=step)
+        
+        # leftover
+        self.leftover = len(imgfiles) % step
+        if self.leftover != 0:
+            self.seq_idx = np.append(self.seq_idx, idx[-16:][None], axis=0)
+
 
     def __len__(self):
         return len(self.imgfiles)
     
     
     def __getitem__(self, index):
+        return self.get_item(index)
+    
+    
+    def get_item(self, index):
         item = {}
-        imgfile = self.imgfiles[index]
         scale = self.scales[index] * self.box_dilate
         center = self.centers[index]
         img_focal = self.img_focal
         img_center = self.img_center
 
+        imgfile = self.imgfiles[index]
         img = cv2.imread(imgfile)[:,:,::-1]
         img_crop = crop(img, center, scale, 
                         [self.crop_size, self.crop_size], 

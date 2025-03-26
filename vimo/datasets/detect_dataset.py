@@ -4,8 +4,8 @@ from torchvision.transforms import Normalize, ToTensor, Compose
 import numpy as np
 import cv2
 
-from lib.core import constants
-from lib.utils.imutils import crop, boxes_2_cs
+from vimo.core import constants
+from vimo.utils.imutils import crop, boxes_2_cs
 
 
 class DetectDataset(Dataset):

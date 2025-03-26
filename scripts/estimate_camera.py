@@ -8,8 +8,8 @@ import numpy as np
 from glob import glob
 from pycocotools import mask as masktool
 
-from lib.pipeline import video2frames, detect_segment_track, visualize_tram
-from lib.camera import run_metric_slam, calibrate_intrinsics, align_cam_to_world
+from vimo.pipeline import video2frames, detect_segment_track, visualize_tram
+from vimo.camera import run_metric_slam, calibrate_intrinsics, align_cam_to_world
 
 
 parser = argparse.ArgumentParser()

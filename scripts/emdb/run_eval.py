@@ -11,10 +11,10 @@ from glob import glob
 from tqdm import tqdm
 from collections import defaultdict
 
-from lib.utils.eval_utils import *
-from lib.utils.rotation_conversions import *
-from lib.vis.traj import *
-from lib.camera.slam_utils import eval_slam
+from vimo.utils.eval_utils import *
+from vimo.utils.rotation_conversions import *
+from vimo.vis.traj import *
+from vimo.camera.slam_utils import eval_slam
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--split', type=int, default=2)

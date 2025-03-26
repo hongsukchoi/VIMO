@@ -7,9 +7,9 @@ import torchvision
 from segment_anything import SamPredictor, sam_model_registry
 from pycocotools import mask as masktool
 
-from lib.utils.utils_detectron2 import DefaultPredictor_Lazy
+from vimo.utils.utils_detectron2 import DefaultPredictor_Lazy
 from detectron2.config import LazyConfig
-from lib.pipeline.deva_track import get_deva_tracker, track_with_mask, flush_buffer
+from vimo.pipeline.deva_track import get_deva_tracker, track_with_mask, flush_buffer
 
 
 if torch.cuda.is_available():

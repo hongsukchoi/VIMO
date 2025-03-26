@@ -10,8 +10,8 @@ from glob import glob
 from tqdm import tqdm
 
 from torch.utils.data import default_collate
-from lib.models import get_hmr_vimo
-from lib.datasets.image_dataset import ImageDataset
+from vimo.models import get_hmr_vimo
+from vimo.datasets.image_dataset import ImageDataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--split', type=int, default=2)

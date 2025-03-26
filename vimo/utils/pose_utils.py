@@ -6,7 +6,7 @@ import torch
 import numpy as np
 from typing import Optional, Dict, List, Tuple
 
-from lib.core import constants
+from vimo.core import constants
 
 
 def compute_error_accel(joints_gt, joints_pred, vis=None):

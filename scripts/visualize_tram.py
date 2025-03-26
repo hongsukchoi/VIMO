@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__) + '/..')
 import argparse
 import numpy as np
 from glob import glob
-from lib.pipeline import visualize_tram
+from vimo.pipeline import visualize_tram
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--video', type=str, default='./example_video.mov', help='input video')

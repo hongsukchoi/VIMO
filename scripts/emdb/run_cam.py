@@ -10,9 +10,9 @@ import pickle as pkl
 from glob import glob
 from tqdm import tqdm
 
-from lib.camera import run_metric_slam, align_cam_to_world
-from lib.pipeline.tools import arrange_boxes
-from lib.utils.utils_detectron2 import DefaultPredictor_Lazy
+from vimo.camera import run_metric_slam, align_cam_to_world
+from vimo.pipeline.tools import arrange_boxes
+from vimo.utils.utils_detectron2 import DefaultPredictor_Lazy
 
 from torch.amp import autocast
 from segment_anything import SamPredictor, sam_model_registry
