@@ -4,11 +4,14 @@ from yacs.config import CfgNode as CN
 from .hmr_vimo import HMR_VIMO
 
 
-def get_default_config():
-    cfg_file = os.path.join(
-        os.path.dirname(__file__),
-        '../config_vimo.yaml'
+def get_default_config(cfg_path=None):
+    if cfg_path is None:
+        cfg_file = os.path.join(
+            os.path.dirname(__file__),
+            '../config_vimo.yaml'
         )
+    else:
+        cfg_file = cfg_path
 
     cfg = CN()
     cfg.set_new_allowed(True)
@@ -16,8 +19,8 @@ def get_default_config():
     return cfg
 
 
-def get_hmr_vimo(checkpoint=None, device='cuda'):
-    cfg = get_default_config()
+def get_hmr_vimo(checkpoint=None, cfg_path=None, device='cuda'):
+    cfg = get_default_config(cfg_path)
     cfg.device = device
     model = HMR_VIMO(cfg)
 
