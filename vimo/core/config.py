@@ -1,7 +1,6 @@
 import argparse
 from yacs.config import CfgNode as CN
 from os.path import join
-from data_config import *
 
 
 # Configuration variables
